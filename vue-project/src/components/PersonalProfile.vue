@@ -743,4 +743,4 @@ body {
     font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
-</style>
+}</style>
