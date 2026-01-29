@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h2>Your Name Here</h2> <p>I am a web developer student learning Vue.js!</p>
+    <h2>Jose Javier Mirador - IT241 Student</h2> <p>I am a web developer student learning Vue.js!</p>
   </div>
 </template>
 
