@@ -93,10 +93,11 @@
                 <i class="bi bi-code-slash"></i> Projects
             </div>
             <div class="card-content">
-                <div class="skill-tag-container">
-                    <span class="skill-tag">Voice AI</span>
-                    <span class="skill-tag">Reservation System</span>
-                </div>
+<div class="skill-tag-container">
+  <span v-for="project in projects" :key="project.id" class="skill-tag">
+    {{ project.title }}
+  </span>
+</div>
             </div>
         </div>
 
