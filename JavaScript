@@ -3,11 +3,14 @@ const { createApp } = Vue
 createApp({
     data() {
         return {
-            message: 'Hello World Vue.js!',
-            images: [
-                { id: 1, url: 'https://via.placeholder.com/150', alt: 'Sample 1' },
-                { id: 2, url: 'https://via.placeholder.com/150', alt: 'Sample 2' }
-            ]
+            fullName: 'JOSE MIRADOR',
+            aboutMe: "Hello! I'm JV, a second-year IT student at Asia Pacific College. I'm passionate about technology and hands-on electronics.",
+            galleryImages: [
+                { id: 1, url: 'https://images.unsplash.com/photo-1624138784614-87fd1b6528f8?q=80&w=500', alt: 'Valorant Gaming' },
+                { id: 2, url: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=500', alt: 'Basketball' },
+                { id: 3, url: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=500', alt: 'Music' }
+            ],
+            socialIcons: ['facebook', 'instagram', 'spotify', 'linkedin', 'github']
         }
     }
 }).mount('#app')
