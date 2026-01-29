@@ -1,10 +1,12 @@
 <script setup>
-  // We will add your profile components here later
+  import PersonalProfile from './components/PersonalProfile.vue'
 </script>
 
 <template>
   <div class="portfolio-wrapper">
     <h1>Portfolio Loading...</h1>
+    
+    <PersonalProfile />
   </div>
 </template>
 
