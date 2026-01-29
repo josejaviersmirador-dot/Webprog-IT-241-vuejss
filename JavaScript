@@ -1,0 +1,13 @@
+const { createApp } = Vue
+
+createApp({
+    data() {
+        return {
+            message: 'Hello World Vue.js!',
+            images: [
+                { id: 1, url: 'https://via.placeholder.com/150', alt: 'Sample 1' },
+                { id: 2, url: 'https://via.placeholder.com/150', alt: 'Sample 2' }
+            ]
+        }
+    }
+}).mount('#app')
