@@ -1,14 +1,11 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue' 
+import { ref, onMounted } from 'vue' 
 import { supabase } from '../lib/supabaseClient'
 
 const comments = ref([])
+const userName = ref('') // Added for the Name input
 const newComment = ref('')
 
-const charCount = computed(() => newComment.value.length)
-const maxChars = 280
-
-// Fetch comments from Supabase
 const fetchComments = async () => {
   const { data, error } = await supabase
     .from('comments')
@@ -19,35 +16,25 @@ const fetchComments = async () => {
   else comments.value = data
 }
 
-// Post a new comment
 const postComment = async () => {
-  if (!newComment.value.trim()) {
-    alert("Please enter a message!")
+  if (!newComment.value.trim() || !userName.value.trim()) {
+    alert("Please fill in both Name and Comment!")
     return
   }
 
   const { error } = await supabase.from('comments').insert([
-    { content: newComment.value, page_path: window.location.pathname }
+    { 
+      user_name: userName.value, // Make sure your DB column is named 'user_name'
+      content: newComment.value, 
+      page_path: window.location.pathname 
+    }
   ])
 
   if (error) {
     alert("Error: " + error.message)
   } else {
     newComment.value = ''
-    fetchComments()
-  }
-}
-
-// Delete a comment
-const deleteComment = async (id) => {
-  const { error } = await supabase
-    .from('comments')
-    .delete()
-    .eq('id', id)
-
-  if (error) {
-    alert("Error deleting: " + error.message)
-  } else {
+    userName.value = ''
     fetchComments()
   }
 }
@@ -55,79 +42,68 @@ const deleteComment = async (id) => {
 onMounted(() => {
   fetchComments()
 })
-</script> <template>
-  <div class="comment-section">
-    <textarea v-model="newComment" :maxlength="maxChars" placeholder="Leave a comment..."></textarea>
-    
-    <p :class="{ 'text-danger': charCount >= maxChars }">
-      {{ charCount }} / {{ maxChars }} characters
-    </p>
+</script>
 
-    <button @click="postComment">Post Comment</button>
-
-    <div v-if="comments.length === 0" style="margin-top: 20px; color: gray;">
-      No comments yet.
+<template>
+  <div class="feedback-container">
+    <div class="comment-form">
+      <h2>Leave a Comment</h2>
+      <label>Name:</label>
+      <input v-model="userName" type="text" placeholder="Your Name" />
+      
+      <label>Comment:</label>
+      <textarea v-model="newComment" placeholder="Your message..."></textarea>
+      
+      <button @click="postComment">Submit</button>
     </div>
 
-    <div v-for="c in comments" :key="c.id" class="comment-card">
-      <p>{{ c.content }}</p>
-      <small>{{ new Date(c.created_at).toLocaleString() }}</small>
-      <button @click="deleteComment(c.id)" class="delete-btn">Delete</button>
+    <div class="comments-list">
+      <h2>Comments</h2>
+      <ul>
+        <li v-for="c in comments" :key="c.id">
+          <strong>{{ c.user_name }}</strong>: {{ c.content }}
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 
 <style scoped>
-.comment-section {
-  max-width: 600px;
-  margin: 20px auto;
-  font-family: sans-serif;
+.feedback-container {
+  max-width: 500px;
+  margin: 20px;
+  font-family: Arial, sans-serif;
 }
 
-textarea {
-  width: 100%;
-  height: 80px;
-  margin-bottom: 10px;
-  padding: 10px;
+.comment-form {
+  border: 1px dashed black;
+  padding: 15px;
+  background-color: #fdfde0; /* Light yellow like your image */
 }
 
-p {
-  font-size: 0.8rem;
-  color: #666;
-  margin-top: -5px;
-}
-
-.text-danger {
-  color: red;
-  font-weight: bold;
-}
-
-.comment-card {
-  background: #f9f9f9;
-  border-left: 4px solid #3ecf8e;
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 4px;
-  position: relative;
-}
-
-small {
-  color: #666;
+input, textarea {
   display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  padding: 5px;
 }
 
-.delete-btn {
-  background: none;
+button {
+  background-color: #007bff;
+  color: white;
   border: none;
-  color: #ff4d4d;
+  padding: 8px 15px;
+  border-radius: 4px;
   cursor: pointer;
-  font-size: 0.75rem;
-  margin-top: 5px;
-  padding: 0;
-  text-decoration: underline;
 }
 
-.delete-btn:hover {
-  color: #cc0000;
+ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 5px;
 }
 </style>
