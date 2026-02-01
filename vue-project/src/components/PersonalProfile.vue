@@ -5,12 +5,13 @@ import { supabase } from '../lib/supabaseClient'
 const sportsList = ref([])
 
 async function fetchSports() {
+  // Uses 'Sport' (singular) to match your Supabase table name exactly
   const { data, error } = await supabase
     .from('Sport') 
     .select('Name')
   
   if (error) {
-    console.error('Error:', error.message)
+    console.error('Error fetching data:', error.message)
   } else {
     sportsList.value = data
   }
@@ -25,7 +26,8 @@ onMounted(() => {
   <div class="list-container">
     <ul v-if="sportsList.length > 0">
       <li v-for="sport in sportsList" :key="sport.id">
-        {{ sport.Name }} </li>
+        {{ sport.Name }}
+      </li>
     </ul>
     <p v-else>Connecting to database...</p>
   </div>
