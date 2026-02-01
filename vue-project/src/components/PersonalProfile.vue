@@ -38,7 +38,10 @@ onMounted(() => {
       </li>
     </ul>
     
-    <p v-else>Connecting to database...</p>
+    <p v-else>Basketball
+        Badminton
+        Volleyball
+    </p>
   </div>
 </template>
 
