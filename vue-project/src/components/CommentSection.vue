@@ -14,11 +14,18 @@ const fetchComments = async () => {
 }
 
 const postComment = async () => {
-  await supabase.from('comments').insert([
+  alert("Button clicked!"); // Add this line
+  const { error } = await supabase.from('comments').insert([
     { content: newComment.value, page_path: window.location.pathname }
   ])
-  newComment.value = ''
-  fetchComments()
+  
+  if (error) {
+    alert("Error: " + error.message);
+  } else {
+    alert("Success!");
+    newComment.value = ''
+    fetchComments()
+  }
 }
 
 onMounted(() => fetchComments())
