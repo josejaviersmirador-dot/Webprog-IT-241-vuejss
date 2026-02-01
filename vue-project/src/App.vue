@@ -1,17 +1,15 @@
 <script setup>
-  import PersonalProfile from './components/PersonalProfile.vue'
-  import Education from './components/Education.vue'
-  import Interests from './components/Interests.vue'
+import PersonalProfile from './components/PersonalProfile.vue'
 </script>
 
 <template>
-  <div class="portfolio-wrapper">
-    <PersonalProfile />
-    <Education />
-
-    <Interests />
-  </div>
+  <PersonalProfile />
 </template>
 
-<style scoped>
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  background-color: white;
+}
 </style>
