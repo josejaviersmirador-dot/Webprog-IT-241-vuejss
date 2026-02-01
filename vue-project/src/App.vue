@@ -1,15 +1,11 @@
 <script setup>
-import PersonalProfile from './components/PersonalProfile.vue'
+import CommentSection from './components/CommentSection.vue'
 </script>
 
 <template>
-  <PersonalProfile />
+  <main>
+    <hr />
+    <h2>Guestbook / Feedback</h2>
+    <CommentSection />
+  </main>
 </template>
-
-<style>
-body {
-  margin: 0;
-  padding: 0;
-  background-color: white;
-}
-</style>
