@@ -38,10 +38,11 @@ onMounted(() => {
       </li>
     </ul>
     
-    <p v-else>Basketball
-        Badminton
-        Volleyball
-    </p>
+    <ul v-else>
+      <li>Basketball</li>
+      <li>Badminton</li>
+      <li>Volleyball</li>
+    </ul>
   </div>
 </template>
 
