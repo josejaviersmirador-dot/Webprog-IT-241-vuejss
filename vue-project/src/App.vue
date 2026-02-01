@@ -3,9 +3,8 @@ import CommentSection from './components/CommentSection.vue'
 </script>
 
 <template>
-  <main>
+  <div>
     <hr />
-    <h2>Guestbook / Feedback</h2>
     <CommentSection />
-  </main>
+  </div>
 </template>
