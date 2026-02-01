@@ -14,7 +14,11 @@ const fetchComments = async () => {
 }
 
 const postComment = async () => {
-  alert("Button clicked!"); // Add this line
+  if (!newComment.value.trim()) {
+    alert("Please write something before posting!");
+    return;
+  }
+
   const { error } = await supabase.from('comments').insert([
     { content: newComment.value, page_path: window.location.pathname }
   ])
@@ -22,7 +26,6 @@ const postComment = async () => {
   if (error) {
     alert("Error: " + error.message);
   } else {
-    alert("Success!");
     newComment.value = ''
     fetchComments()
   }
@@ -42,3 +45,29 @@ onMounted(() => fetchComments())
     </div>
   </div>
 </template>
+<style scoped>
+.comment-section {
+  max-width: 600px;
+  margin: 20px auto;
+  font-family: sans-serif;
+}
+
+textarea {
+  width: 100%;
+  height: 80px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.comment-card {
+  background: #f9f9f9;
+  border-left: 4px solid #3ecf8e; /* Supabase Green */
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 4px;
+}
+
+small {
+  color: #666;
+}
+</style>
