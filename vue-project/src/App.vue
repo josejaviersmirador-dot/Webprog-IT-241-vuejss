@@ -10,7 +10,20 @@ import Education from './components/Education.vue'
     
     <RestApi />
 
+    <hr />
+    
     <PersonalProfile />
     <Education />
   </div>
 </template>
+
+<style scoped>
+.portfolio-wrapper {
+  padding: 20px;
+  color: white;
+}
+hr {
+  margin: 40px 0;
+  border: 1px solid #444;
+}
+</style>
